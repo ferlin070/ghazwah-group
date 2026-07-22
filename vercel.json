@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ghazwahgroup.com"
+        }
+      ],
+      "destination": "https://ghazwahgroup.com/$1",
+      "permanent": true
+    }
+  ]
+}
