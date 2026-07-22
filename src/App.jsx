@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
 import TrustBar from './components/TrustBar';
@@ -77,6 +78,9 @@ export default function App() {
 
       {/* Floating AI Chatbot Widget (GIA) — lightweight, static import */}
       <ChatbotWidget />
+
+      {/* Vercel Analytics — page views and web vitals */}
+      <Analytics />
     </div>
   );
 }
