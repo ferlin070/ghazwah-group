@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
 import TrustBar from './components/TrustBar';
@@ -81,6 +82,9 @@ export default function App() {
 
       {/* Vercel Analytics — page views and web vitals */}
       <Analytics />
+
+      {/* Vercel Speed Insights — Core Web Vitals monitoring */}
+      <SpeedInsights />
     </div>
   );
 }
