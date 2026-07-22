@@ -1,0 +1,80 @@
+Laman Utama (Home)
+GHAZWAH GROUP Pusat Inovasi Digital & Pengurusan Ekosistem Bersepadu
+Tagline: "CLOUD SOLUTIONS • IT INNOVATION • BUSINESS GROWTH"
+Selamat Datang ke Ghazwah Group Ghazwah Group adalah sebuah entiti korporat dan syarikat induk dinamik yang beroperasi merentasi pelbagai sektor industri berimpak tinggi. Ditunjangi oleh kepakaran dalam infrastruktur digital, kejuruteraan perisian, e-dagang gaya hidup, agroteknologi moden, dan pemasaran strategik, kami komited untuk memacu transformasi digital secara holistik untuk pasaran Malaysia.
+
+Mengenai Kami (About Us)
+Pengenalan Korporat Ditubuhkan pada tahun 2026, Ghazwah Group (berdaftar di bawah SSM sebagai Ghazwah Trading) beroperasi dari ibu pejabatnya di Inkubator DFK, TVETMARA Besut. Syarikat ini menggunakan pendekatan pengurusan berautomasi tinggi dengan integrasi aplikasi dan pangkalan data terkini untuk menjamin kecekapan perniagaan.
+
+Barisan Kepimpinan (Rakan Kongsi Utama): Syarikat ini diasaskan dan diterajui secara bersama oleh:
+Muhammad Nu'man Nafiah Bin Amin
+Muhammad Afnan Bin Mohd Khairani
+Ahmad Zahid Bin Mohd Sofi
+
+Barisan Penasihat (Advisors): Ghazwah Group turut mendapat bimbingan teknikal dan strategik daripada barisan penasihat yang berpengalaman:
+Ts. Mohd Zubir bin Md Zin
+Ts. Zulfadli Saad
+
+Identiti Jenama Kami
+Logo Korporat (Ghazwah Group): Menampilkan rekaan inisial "GHZ" yang kreatif berwarna perak dan biru, diserikan dengan elemen litar teknologi digital berlatarbelakangkan rona hitam. Reka bentuk ini melambangkan fokus teras syarikat terhadap inovasi teknologi masa hadapan.
+Logo Operasi & Inkubator (DFK INC): Menampilkan tipografi "DFK INC - INCUBATOR TVETMARA BESUT" yang kemas, kukuh, dan profesional dengan gabungan warna biru gelap berserta aksen merah.
+Tema Warna Korporat: Hitam, Biru, Perak, dan Merah.
+
+Visi Syarikat Menjadi konglomerat peneraju di Malaysia yang mengintegrasikan kecemerlangan perkomputeran awan, e-dagang gaya hidup digital, inovasi agroteknologi, dan strategi pemasaran dinamik ke dalam satu ekosistem perniagaan yang mampan dan berprestasi tinggi.
+
+Portfolio Projek & Inovasi Digital Kami (Our Projects)
+Sebagai perintis teknologi di bawah Inkubator DFK TVETMARA Besut, kami telah berjaya membangunkan pelbagai sistem berskala industri. Berikut adalah portfolio teras kami:
+
+Inovasi Teknologi Kesihatan (Healthcare Technology)
+1. Smart Caregiver (App & Enteral Feeding Kit) Produk kesihatan inovatif ini direka khusus untuk membantu penjaga pesakit menguruskan pemakanan tiub enteral (Ryles Tube) di rumah, terutamanya bagi pesakit strok, warga emas, atau pesakit terlantar.
+Ciri-Ciri Utama: Didatangkan dengan kit perubatan mudah alih yang mengandungi tablet Android berkuasa tinggi. Ia dilengkapi dengan Sistem Pengurusan Pembelajaran (LMS) interaktif yang beroperasi secara 100% luar talian (offline).
+Sistem Panduan & Kecemasan: Menyediakan panduan langkah demi langkah melalui visual, video, dan fungsi Teks-ke-Ucapan (Audio Bahasa Melayu). Ia juga dilengkapi Mod Kecemasan 1-Klik (hubungi 999) dan panduan penyelesaian masalah bagi situasi kritikal seperti pesakit tercekik, muntah, atau tiub tercabut.
+Impak: Meningkatkan keyakinan penjaga, mengurangkan kos rawatan, dan menurunkan kadar kemasukan semula pesakit ke wad (hospital readmission) akibat kesilapan prosedur.
+
+Sistem Pengurusan Perniagaan & POS (Point of Sale)
+2. EZOffice: Sistem pengurusan HR dan Gaji pintar offline-first untuk PKS dan kilang. Dilengkapi integrasi peranti cap jari ZKTeco, pengiraan statutori automatik (EPF, SOCSO), penjanaan slip gaji PDF, dan pengurusan cuti secara masa nyata.
+3. CrossXPOSS: Sistem POS offline-first khusus untuk restoran (F&B). Menyediakan paparan pesanan dapur digital (KOT), pengurusan meja visual, troli pesanan interaktif, dan laporan jualan pintar.
+4. EZPos: Sistem POS desktop untuk perniagaan runcit dengan sokongan pengimbas kod bar, amaran stok rendah, kalkulator analisis keuntungan automatik, dan jejak audit inventori.
+5. E-Care (Portal CMS PTA): Platform perkhidmatan awan berpusat untuk pengurusan pembaikan barangan elektrik, memaparkan status pembaikan masa nyata (dari kaunter ke bengkel), pengurusan jaminan (warranty), dan notifikasi pelanggan berautomatik.
+
+Penyelesaian Kepintaran Buatan (AI) & Automasi Web
+6. AI Agent (AI Command Center): Pasukan tenaga kerja maya 24/7 yang menawarkan penjimatan kos operasi sehingga 70%. Mempunyai 8 ejen AI khusus termasuk Zara (Kewangan), Aiman (Pemasaran), Maya (Jualan/CRM), dan Hakim (Teknikal).
+7. I-MEX (IMEX AI-Biz): Papan pemuka analitik perniagaan menggunakan Gemini AI yang mampu menjana laporan SWOT tahap profesional, analisis kebolehsanaan perniagaan, dan skrip pembentangan (pitching) pelabur 60 saat yang sedia untuk permohonan geran.
+8. Web Instant & Prompt Generator: Platform pembina laman web berkuasa AI yang membolehkan usahawan menjana laman web responsif dengan cloud hosting terbina dalam kurang dari 60 saat melalui prompt teks, tanpa memerlukan sebarang kemahiran pengaturcaraan.
+
+Pengehosan Awan & Teknologi Komuniti
+9. Cloud Hosting Automation (Arowwai Control Panel): Papan pemuka automasi perniagaan untuk menguruskan Pelayan Maya Peribadi (VPS), pendaftaran domain/subdomain secara automatik, storan awan selamat, dan pembina laman web menggunakan infrastruktur Proxmox dan Docker.
+10. Sistem Maklum Balas QR Dalam Talian: Platform maklum balas awan tanpa pelayan (Firebase) yang menggunakan kod QR untuk pengesanan lokasi pelanggan secara automatik (contohnya maklum balas khusus mengikut nombor meja), dengan papan pemuka analitik masa nyata untuk pentadbir.
+
+Struktur Anak Syarikat (Our Subsidiaries)
+Ekosistem perniagaan kami dibahagikan kepada empat cabang operasi utama:
+
+1. Ghazwah Cloud (Platform & Infrastruktur Digital)
+Cabang teknologi memfokuskan kepada penyelesaian pelayan hibrid.
+Ghazwah Platform: Sistem berpusat menguruskan pangkalan web, storan awan, dan papan pemuka pentadbiran menggunakan bahasa pengaturcaraan Go (Golang).
+Infrastruktur DevOps: Mengurus pelayan berprestasi tinggi berasaskan Proxmox, Ubuntu, dan sambungan selamat menggunakan Cloudflare Tunnels.
+Perundingan Akademik: Khidmat konsultasi IT dan Perkomputeran Awan untuk projek pelajar institusi kemahiran.
+
+2. Ghazwah Store (Pasaran Digital & Gaya Hidup)
+Cabang e-dagang interaktif (sebelum ini dikenali sebagai Ghazwah Topup).
+Hab Transaksi Permainan: Platform digital pantas untuk tambah nilai mata wang permainan dengan integrasi API pembekal (seperti IAK dan Moonton).
+Perundingan IT & PC: Rundingan pakar bagi spesifikasi perkakasan komputer dan persediaan industri e-sukan.
+
+3. Ghazwah Marketing (Pembangunan Perniagaan)
+Nadi pertumbuhan komersial syarikat.
+Pemerolehan pelanggan B2B dan B2C untuk melanggan servis awan dan produk agroteknologi.
+Membida tender dan projek infrastruktur dari sektor awam mahupun swasta.
+Merangka kempen penjenamaan dan pengiklanan digital yang proaktif.
+
+4. Agroteknologi & Pertanian Moden
+Cabang operasi fizikal yang menyokong kelestarian pertanian komersial, memfokuskan kepada sekuriti makanan seperti bekalan telur, pembiakan ayam, pengeluaran baja kompos organik, dan tanaman alternatif (pokok ketum ayam).
+
+Hubungi Kami (Contact Us)
+Kami sentiasa bersedia untuk berkolaborasi dan membantu memacu transformasi perniagaan anda melalui digitalisasi.
+Alamat Ibu Pejabat: Inkubator DFK (Ghazwah Group), Institut Kemahiran MARA Besut (TVETMARA Besut), Jalan Batu Tumbuh, Alor Lintang, 22200 Kampung Raja, Terengganu Darul Iman.
+
+E-mel & Telefon:
+E-mel Syarikat: ghazwahgroup@gmail.com
+Telefon Syarikat / WhatsApp: 019-513 2821 / +60 11-1501 4037
+
+Maklumat Pendaftaran Syarikat: Nama Berdaftar: GHAZWAH TRADING No. Pendaftaran SSM: 202603084068 (003836930-K)

@@ -1,0 +1,45 @@
+[
+  {
+    "id": "ghazwah-cloud",
+    "name": "Ghazwah Cloud",
+    "tagline": "Platform & Infrastruktur Digital",
+    "description": "Cabang teknologi yang memfokuskan kepada penyelesaian pelayan hibrid dan perkomputeran awan.",
+    "details": [
+      "Ghazwah Platform: Sistem berpusat menguruskan pangkalan web, storan awan, dan papan pemuka pentadbiran menggunakan bahasa pengaturcaraan Go (Golang).",
+      "Infrastruktur DevOps: Mengurus pelayan berprestasi tinggi berasaskan Proxmox, Ubuntu, dan sambungan selamat menggunakan Cloudflare Tunnels.",
+      "Perundingan Akademik: Khidmat konsultasi IT dan Perkomputeran Awan untuk projek pelajar institusi kemahiran."
+    ]
+  },
+  {
+    "id": "ghazwah-store",
+    "name": "Ghazwah Store",
+    "tagline": "Pasaran Digital & Gaya Hidup",
+    "description": "Cabang e-dagang interaktif (sebelum ini dikenali sebagai Ghazwah Topup) untuk peminat teknologi dan permainan.",
+    "details": [
+      "Hab Transaksi Permainan: Platform digital pantas untuk tambah nilai mata wang permainan dengan integrasi API pembekal (seperti IAK dan Moonton).",
+      "Perundingan IT & PC: Rundingan pakar bagi spesifikasi perkakasan komputer dan persediaan industri e-sukan."
+    ]
+  },
+  {
+    "id": "ghazwah-marketing",
+    "name": "Ghazwah Marketing",
+    "tagline": "Pembangunan Perniagaan",
+    "description": "Nadi pertumbuhan komersial dan penjenamaan korporat bagi ekosistem Ghazwah Group.",
+    "details": [
+      "Pemerolehan pelanggan B2B dan B2C untuk melanggan servis awan dan produk agroteknologi.",
+      "Membida tender dan projek infrastruktur dari sektor awam mahupun swasta.",
+      "Merangka kempen penjenamaan dan pengiklanan digital yang proaktif."
+    ]
+  },
+  {
+    "id": "agroteknologi",
+    "name": "Agroteknologi & Pertanian Moden",
+    "tagline": "Sekuriti Makanan & Agrikultur Moden",
+    "description": "Cabang operasi fizikal yang menyokong kelestarian pertanian komersial demi menjamin rantaian bekalan makanan negara.",
+    "details": [
+      "Penyediaan bekalan telur dan pembiakan ayam secara komersial.",
+      "Pengeluaran baja kompos organik berkualiti tinggi.",
+      "Penanaman tanaman alternatif berimpak tinggi seperti pokok ketum ayam."
+    ]
+  }
+]

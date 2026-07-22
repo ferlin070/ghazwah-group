@@ -1,0 +1,127 @@
+[
+  {
+    "id": "smart-caregiver",
+    "name": "Smart Caregiver (App & Enteral Feeding Kit)",
+    "category": "Healthcare Technology",
+    "description": "Produk kesihatan inovatif direka khas untuk membantu penjaga pesakit menguruskan pemakanan tiub enteral (Ryles Tube) di rumah, terutamanya bagi pesakit strok, warga emas, atau pesakit terlantar.",
+    "features": [
+      "Tablet Android berkuasa tinggi dalam kit mudah alih.",
+      "Sistem Pengurusan Pembelajaran (LMS) interaktif yang beroperasi 100% luar talian (offline).",
+      "Panduan langkah demi langkah menggunakan visual, video, dan fungsi Teks-ke-Ucapan (Audio BM).",
+      "Mod Kecemasan 1-Klik (hubungi 999) dan panduan penyelesaian masalah kritikal (tercekik, muntah, tiub tercabut)."
+    ],
+    "impact": "Meningkatkan keyakinan penjaga, mengurangkan kos rawatan, dan menurunkan kadar kemasukan semula pesakit ke wad (hospital readmission)."
+  },
+  {
+    "id": "ezoffice",
+    "name": "EZOffice",
+    "category": "Business & POS",
+    "description": "Sistem pengurusan HR dan Gaji pintar offline-first untuk Perusahaan Kecil dan Sederhana (PKS) serta kilang.",
+    "features": [
+      "Integrasi peranti cap jari ZKTeco.",
+      "Pengiraan statutori automatik (EPF, SOCSO, EIS).",
+      "Penjanaan slip gaji format PDF.",
+      "Pengurusan cuti pekerja secara masa nyata (real-time)."
+    ],
+    "impact": "Memudahkan urusan pentadbiran dan pematuhan undang-undang buruh secara luar talian."
+  },
+  {
+    "id": "crossxposs",
+    "name": "CrossXPOSS",
+    "category": "Business & POS",
+    "description": "Sistem Point of Sale (POS) offline-first khusus untuk pengurusan restoran dan F&B.",
+    "features": [
+      "Paparan pesanan dapur digital (Kitchen Order Ticket - KOT).",
+      "Pengurusan susun atur meja secara visual.",
+      "Troli pesanan interaktif.",
+      "Laporan jualan pintar untuk analisis harian/bulanan."
+    ],
+    "impact": "Memperkemas aliran kerja restoran dari pengambilan pesanan hingga penyediaan di dapur."
+  },
+  {
+    "id": "ezpos",
+    "name": "EZPos",
+    "category": "Business & POS",
+    "description": "Sistem POS desktop berprestasi tinggi untuk perniagaan runcit.",
+    "features": [
+      "Sokongan penuh pengimbas kod bar (barcode scanner).",
+      "Sistem amaran stok rendah automatik.",
+      "Kalkulator analisis keuntungan automatik.",
+      "Jejak audit inventori bagi mencegah kehilangan stok."
+    ],
+    "impact": "Membantu pemilik kedai runcit mengawal inventori dan menganalisis prestasi jualan dengan mudah."
+  },
+  {
+    "id": "e-care",
+    "name": "E-Care (Portal CMS PTA)",
+    "category": "Business & POS",
+    "description": "Platform perkhidmatan awan berpusat untuk pengurusan pembaikan barangan elektrik.",
+    "features": [
+      "Paparan status pembaikan masa nyata (dari kaunter ke bengkel).",
+      "Sistem pengurusan jaminan (warranty tracking).",
+      "Notifikasi pelanggan berautomatik melalui SMS/E-mel."
+    ],
+    "impact": "Meningkatkan ketelusan servis dan kepuasan pelanggan sepanjang proses pembaikan."
+  },
+  {
+    "id": "ai-agent",
+    "name": "AI Agent (AI Command Center)",
+    "category": "AI & Automation",
+    "description": "Pasukan tenaga kerja maya 24/7 yang menawarkan penjimatan kos operasi sehingga 70%.",
+    "features": [
+      "8 ejen AI khusus bersedia berkhidmat.",
+      "Zara (Kewangan), Aiman (Pemasaran), Maya (Jualan/CRM), Hakim (Teknikal).",
+      "Integrasi berterusan dan automasi perbualan pintar."
+    ],
+    "impact": "Mengurangkan beban kerja kakitangan manusia dan bertindak balas kepada pelanggan secara segera."
+  },
+  {
+    "id": "i-mex",
+    "name": "I-MEX (IMEX AI-Biz)",
+    "category": "AI & Automation",
+    "description": "Papan pemuka analitik perniagaan menggunakan Gemini AI untuk usahawan.",
+    "features": [
+      "Penjanaan laporan SWOT tahap profesional.",
+      "Analisis kebolehsanaan perniagaan (feasibility analysis).",
+      "Penjana skrip pembentangan (pitching) pelabur 60 saat yang sedia untuk permohonan geran."
+    ],
+    "impact": "Mempercepatkan penyediaan kertas kerja perniagaan dan pencarian pelaburan."
+  },
+  {
+    "id": "web-instant",
+    "name": "Web Instant & Prompt Generator",
+    "category": "AI & Automation",
+    "description": "Platform pembina laman web berkuasa AI dalam masa kurang dari 60 saat melalui prompt teks.",
+    "features": [
+      "Penjanaan laman web responsif sepenuhnya.",
+      "Pengehosan awan (cloud hosting) terbina dalam.",
+      "Tanpa memerlukan kemahiran pengaturcaraan atau kod."
+    ],
+    "impact": "Memudahkan PKS dan usahawan baharu membina kehadiran digital dengan kos minimum."
+  },
+  {
+    "id": "cloud-hosting",
+    "name": "Cloud Hosting Automation (Arowwai Control Panel)",
+    "category": "Cloud",
+    "description": "Papan pemuka automasi perniagaan untuk menguruskan Pelayan Maya Peribadi (VPS) dan pengehosan.",
+    "features": [
+      "Pengurusan VPS secara automasi menerusi Proxmox dan Docker.",
+      "Pendaftaran domain dan subdomain secara automatik.",
+      "Storan awan (cloud storage) yang selamat dan disendiri.",
+      "Sambungan selamat menggunakan Cloudflare Tunnels."
+    ],
+    "impact": "Menyediakan kawalan penuh terhadap infrastruktur digital tanpa kompromi keselamatan."
+  },
+  {
+    "id": "sistem-maklum-balas-qr",
+    "name": "Sistem Maklum Balas QR Dalam Talian",
+    "category": "Cloud",
+    "description": "Platform maklum balas awan tanpa pelayan (serverless) berasaskan kod QR untuk lokasi fizikal.",
+    "features": [
+      "Menggunakan Firebase untuk seni bina serverless yang pantas.",
+      "Pengesanan lokasi pelanggan secara automatik (contohnya maklum balas khusus mengikut nombor meja).",
+      "Papan pemuka analitik masa nyata untuk pentadbir."
+    ],
+    "impact": "Memudahkan pemilik premis mengumpul maklum balas pelanggan secara terarah dan masa nyata."
+  }
+]
