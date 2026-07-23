@@ -4,7 +4,6 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
 import TrustBar from './components/TrustBar';
-import ChatbotWidget from './components/ChatbotWidget';
 import { initGA, trackPageView } from './utils/analytics';
 
 // Code-split below-the-fold sections to reduce initial JS bundle size.
@@ -15,6 +14,7 @@ const About = lazy(() => import('./sections/About'));
 const Portfolio = lazy(() => import('./sections/Portfolio'));
 const Subsidiaries = lazy(() => import('./sections/Subsidiaries'));
 const CollabAndContact = lazy(() => import('./sections/CollabAndContact'));
+const ChatbotWidget = lazy(() => import('./components/ChatbotWidget'));
 const Footer = lazy(() => import('./components/Footer'));
 
 // Minimal placeholder for lazy-loaded sections
@@ -73,12 +73,13 @@ export default function App() {
         </Suspense>
       </main>
 
+      <Suspense fallback={null}>
+        <ChatbotWidget />
+      </Suspense>
+
       <Suspense fallback={<SectionFallback />}>
         <Footer />
       </Suspense>
-
-      {/* Floating AI Chatbot Widget (GIA) — lightweight, static import */}
-      <ChatbotWidget />
 
       {/* Vercel Analytics — page views and web vitals */}
       <Analytics />

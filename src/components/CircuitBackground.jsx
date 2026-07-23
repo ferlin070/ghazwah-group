@@ -10,9 +10,13 @@ export default function CircuitBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId;
+    let animationFrameId = null;
     let particles = [];
-    
+    let isPaused = false;
+    let lastFrameTime = 0;
+    const TARGET_FPS = 30;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
+
     // Check user preference for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -56,13 +60,13 @@ export default function CircuitBackground() {
 
       draw(context) {
         // Subtle pulsing size effect
-        const currentRadius = prefersReducedMotion 
-          ? this.radius 
+        const currentRadius = prefersReducedMotion
+          ? this.radius
           : this.radius + Math.sin(this.pulse) * 0.5;
 
         context.beginPath();
         context.arc(this.x, this.y, currentRadius, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(46, 124, 246, 0.8)'; // Electric blue
+        context.fillStyle = 'rgba(46, 124, 246, 0.8)';
         context.fill();
 
         // Draw outer glow for larger nodes
@@ -80,12 +84,12 @@ export default function CircuitBackground() {
       const height = canvas.height;
       particles = [];
 
-      // Determine density based on screen size (mobile-friendly)
-      let count = 45;
+      // Aggressively reduce particle count for performance
+      let count = 25;
       if (width < 640) {
-        count = 15; // Fewer particles on mobile for performance
+        count = 8;
       } else if (width < 1024) {
-        count = 30;
+        count = 15;
       }
 
       for (let i = 0; i < count; i++) {
@@ -107,17 +111,10 @@ export default function CircuitBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            // Calculate opacity based on distance
             const alpha = (1 - dist / maxDistance) * 0.18;
             ctx.beginPath();
-            
-            // Draw circuit-board style routes: right angle pathways
-            // Instead of drawing straight diagonal lines, we draw a horizontal then vertical line
             ctx.moveTo(p1.x, p1.y);
-            // Intermediate point creates a 90-degree bend
-            ctx.lineTo(p2.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            
             ctx.strokeStyle = `rgba(46, 124, 246, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
@@ -126,11 +123,20 @@ export default function CircuitBackground() {
       }
     };
 
-    const animate = () => {
+    const animate = (timestamp) => {
+      // 30fps throttle: skip if not enough time has passed
+      if (!prefersReducedMotion && timestamp - lastFrameTime < FRAME_INTERVAL) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = timestamp;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw background ambient grid lines
-      drawGrid();
+      // Draw background ambient grid lines (skip on mobile)
+      if (canvas.width >= 640) {
+        drawGrid();
+      }
 
       // Update and draw particles
       particles.forEach((p) => {
@@ -141,15 +147,15 @@ export default function CircuitBackground() {
       // Connect particles with digital circuit lines
       drawConnections();
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && !isPaused) {
         animationFrameId = requestAnimationFrame(animate);
       }
     };
 
     // Auxiliary function to draw subtle cyber grid lines
     const drawGrid = () => {
-      const step = 60;
-      ctx.strokeStyle = 'rgba(196, 202, 211, 0.015)'; // Very faint silver
+      const step = 80; // wider spacing = fewer lines = less CPU
+      ctx.strokeStyle = 'rgba(196, 202, 211, 0.015)';
       ctx.lineWidth = 0.5;
 
       for (let x = 0; x < canvas.width; x += step) {
@@ -167,11 +173,21 @@ export default function CircuitBackground() {
       }
     };
 
+    // Page Visibility API — pause animation when tab is hidden
+    const onVisibilityChange = () => {
+      isPaused = document.hidden;
+      if (!document.hidden && !prefersReducedMotion) {
+        // Cancel any stale rAF handle and restart the loop cleanly.
+        // Without this, animation freezes after tab is hidden then shown.
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
     // Setup resize observer on parent
     const resizeObserver = new ResizeObserver(() => {
       resizeCanvas();
       if (prefersReducedMotion) {
-        // Redraw static frame once if motion is disabled
         animate();
       }
     });
@@ -181,25 +197,33 @@ export default function CircuitBackground() {
     }
 
     resizeCanvas();
-    // Defer the first animation frame to idle time so it doesn't compete
-    // with the initial React paint for main-thread time.
-    if (typeof requestIdleCallback === 'function') {
-      requestIdleCallback(() => animate(), { timeout: 300 });
-    } else {
-      // Fallback for browsers without requestIdleCallback
-      setTimeout(() => animate(), 50);
-    }
+
+    // Defer animation start by 2s so the main React paint completes first.
+    // This dramatically improves Speed Index / LCP.
+    const startDelay = setTimeout(() => {
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+      // Draw one static frame if motion is reduced
+      if (prefersReducedMotion) {
+        animate();
+      }
+    }, 2000);
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
+      clearTimeout(startDelay);
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
     };
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="absolute inset-0 w-full h-full pointer-events-none z-0 block" 
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-0 block"
     />
   );
 }

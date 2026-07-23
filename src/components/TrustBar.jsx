@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ShieldCheck, Building2, Award } from 'lucide-react';
 
 const trustItems = [
@@ -20,18 +20,9 @@ const trustItems = [
 ];
 
 export default function TrustBar() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 1200);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div
-      className={`relative z-10 w-full bg-ghz-black/90 border-b border-ghz-silver/5 py-3 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-      }`}
+      className="relative z-10 w-full bg-ghz-black/90 border-b border-ghz-silver/5 py-3"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">

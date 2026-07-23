@@ -28,7 +28,7 @@ export default function Hero() {
             src={heroIllustration}
             alt=""
             aria-hidden="true"
-            className="w-auto h-[260px] sm:h-[360px] object-contain opacity-[0.08] sm:opacity-[0.12] animate-pulse-slow"
+            className="w-auto h-[260px] sm:h-[360px] object-contain opacity-[0.08] sm:opacity-[0.12]"
           />
         </div>
       </div>
