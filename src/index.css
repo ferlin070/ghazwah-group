@@ -5,36 +5,72 @@
 @tailwind utilities;
 
 :root {
-  --ghz-black: #0A0E14;
-  --ghz-blue-deep: #0F3D6E;
-  --ghz-blue-electric: #2E7CF6;
-  --ghz-silver: #C4CAD3;
-  --ghz-red: #D62828;
-  --ghz-white: #F5F7FA;
+  /* Nakhoda Cloud Inspired Color Palette */
+  --ghz-black: #0a0a1f;
+  --ghz-black-deep: #1a0b2e;
+  --ghz-blue-deep: #0066ff;
+  --ghz-blue-electric: #00d4ff;
+  --ghz-purple: #6366f1;
+  --ghz-silver: #d1d5db;
+  --ghz-silver-muted: #9ca3af;
+  --ghz-red: #f43f5e;
+  --ghz-gold: #fbbf24;
+  --ghz-green: #10b981;
+  --ghz-white: #ffffff;
+
+  /* Enhanced spacing scale for professional layouts */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Neon Style */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
   background: var(--ghz-black);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--ghz-blue-deep);
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--ghz-blue-electric), var(--ghz-purple));
+  border-radius: 10px;
+  transition: background 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ghz-blue-electric);
+  background: linear-gradient(180deg, var(--ghz-blue-electric), var(--ghz-blue-deep));
+  box-shadow: 0 0 10px var(--ghz-blue-electric);
 }
 
 body {
-  background-color: var(--ghz-black);
+  background: linear-gradient(135deg, var(--ghz-black) 0%, var(--ghz-black-deep) 100%);
   color: var(--ghz-white);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection styling with neon effect */
+::selection {
+  background-color: var(--ghz-blue-electric);
+  color: var(--ghz-black);
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 /* Custom Utility Classes */
@@ -50,15 +86,56 @@ body {
 }
 
 /* =======================================
-   Animated Gradient Border for CTA Buttons
+   Neon Glow Effects - Nakhoda Cloud Style
    =======================================
-   Usage: add .btn-gradient to ANY button/link.
-   Uses mask-composite to restrict the gradient to a 2px border ring,
-   leaving the interior transparent so the button's own bg shows through.
-   Works for both solid (bg-ghz-red) AND outline (border-2) buttons.
+*/
+.neon-glow {
+  box-shadow:
+    0 0 5px rgba(0, 212, 255, 0.3),
+    0 0 10px rgba(0, 212, 255, 0.2),
+    0 0 20px rgba(0, 212, 255, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-glow:hover {
+  box-shadow:
+    0 0 10px rgba(0, 212, 255, 0.5),
+    0 0 20px rgba(0, 212, 255, 0.4),
+    0 0 40px rgba(0, 212, 255, 0.3),
+    0 0 60px rgba(0, 212, 255, 0.2);
+}
+
+.neon-text {
+  text-shadow:
+    0 0 10px rgba(0, 212, 255, 0.8),
+    0 0 20px rgba(0, 212, 255, 0.6),
+    0 0 30px rgba(0, 212, 255, 0.4);
+}
+
+.neon-border {
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  box-shadow:
+    inset 0 0 10px rgba(0, 212, 255, 0.1),
+    0 0 10px rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.neon-border:hover {
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow:
+    inset 0 0 20px rgba(0, 212, 255, 0.2),
+    0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+/* =======================================
+   Animated Gradient Border - Cyberpunk Style
+   =======================================
 */
 .btn-gradient {
   position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ghz-blue-electric), var(--ghz-purple));
+  transition: all 0.4s ease;
 }
 
 .btn-gradient::before {
@@ -69,7 +146,7 @@ body {
   border-radius: inherit;
   padding: 2px;
   background: linear-gradient(135deg,
-    #2E7CF6, #D62828, #10B981, #F59E0B, #2E7CF6
+    var(--ghz-blue-electric), var(--ghz-purple), var(--ghz-blue-deep), var(--ghz-gold), var(--ghz-blue-electric)
   );
   background-size: 300% 300%;
   -webkit-mask:
@@ -82,16 +159,67 @@ body {
   pointer-events: none;
 }
 
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 40px rgba(0, 212, 255, 0.3),
+    0 0 20px rgba(0, 212, 255, 0.2);
+}
+
 .btn-gradient:hover::before {
   opacity: 1;
   animation: gradient-shift 2.5s ease infinite;
-  box-shadow: 0 0 20px rgba(46, 124, 246, 0.25);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
 }
 
 @keyframes gradient-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* =======================================
+   Card Lift Effect - Nakhoda Cloud Style
+   =======================================
+*/
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 40px rgba(0, 212, 255, 0.2),
+    0 0 30px rgba(0, 212, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* =======================================
+   Glassmorphism Effect - Enhanced
+   =======================================
+*/
+.glass-effect {
+  background: rgba(26, 11, 46, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+  background: rgba(26, 11, 46, 0.6);
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.15);
+}
+
+/* =======================================
+   Magnetic Cursor Effect
+   =======================================
+*/
+@media (hover: hover) {
+  .magnetic-hover {
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
 }
 
 /* =======================================
@@ -110,4 +238,161 @@ body {
   0%   { transform: translateY(0px); }
   50%  { transform: translateY(-6px); }
   100% { transform: translateY(0px); }
+}
+
+/* =======================================
+   Shimmer Effect for Loading States
+   =======================================
+*/
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* =======================================
+   Pulse Glow Animation - Cyberpunk
+   =======================================
+*/
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 5px rgba(0, 212, 255, 0.4),
+      0 0 10px rgba(0, 212, 255, 0.2),
+      0 0 15px rgba(0, 212, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(0, 212, 255, 0.6),
+      0 0 30px rgba(0, 212, 255, 0.4),
+      0 0 40px rgba(0, 212, 255, 0.2);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* =======================================
+   Gradient Text Effect
+   =======================================
+*/
+.gradient-text {
+  background: linear-gradient(135deg, var(--ghz-blue-electric), var(--ghz-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(90deg,
+    var(--ghz-blue-electric),
+    var(--ghz-purple),
+    var(--ghz-blue-deep),
+    var(--ghz-blue-electric)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-flow 3s linear infinite;
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* =======================================
+   Radial Glow Backgrounds
+   =======================================
+*/
+.radial-glow-cyan {
+  position: relative;
+}
+
+.radial-glow-cyan::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.radial-glow-purple {
+  position: relative;
+}
+
+.radial-glow-purple::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* =======================================
+   3D Card Transform
+   =======================================
+*/
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+.card-3d:hover {
+  transform: translateZ(20px);
+}
+
+/* =======================================
+   Smooth Transitions for Professional Feel
+   =======================================
+*/
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
