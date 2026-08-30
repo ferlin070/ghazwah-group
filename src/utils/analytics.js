@@ -1,23 +1,30 @@
-/**
- * Google Analytics 4 — lightweight wrapper
- *
- * Usage:
- *   import { trackEvent } from '../utils/analytics';
- *   trackEvent('conversion', 'form_submit', 'Hubungi Kami');
- *
- * GA4 is only active when VITE_GA_MEASUREMENT_ID is set in the environment.
- * In dev mode (VITE_DEV) events are logged to the console instead.
- */
-
 const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 const IS_DEV = import.meta.env.DEV;
-
-/** Has the gtag script been loaded? */
+const SCRIPT_ID = 'ghz-ga-script';
 let initialized = false;
 
-/** Call once (from App.jsx) to push the initial page_view event. */
+function ensureGtag() {
+  if (!GA_ID || typeof document === 'undefined') return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag() {
+    window.dataLayer.push(arguments);
+  };
+
+  if (document.getElementById(SCRIPT_ID)) return;
+
+  const script = document.createElement('script');
+  script.id = SCRIPT_ID;
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`;
+  script.onerror = () => {
+    script.remove();
+  };
+  document.head.appendChild(script);
+}
+
 export function initGA() {
-  if (!GA_ID && !IS_DEV) return;               // No ID configured — skip silently
+  if (!GA_ID && !IS_DEV) return;
   if (initialized) return;
   initialized = true;
 
@@ -26,19 +33,13 @@ export function initGA() {
     return;
   }
 
-  // gtag is already set up by the <script> tag in index.html.
-  // DO NOT reassign window.gtag here — that would overwrite the real
-  // gtag function loaded by gtag.js and break all subsequent event tracking.
-  // Index.html already handles gtag('js', ...) and gtag('config', ...).
+  ensureGtag();
+  if (typeof window.gtag === 'function') {
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID);
+  }
 }
 
-/**
- * Track a conversion event.
- *
- * @param {'conversion'|'engagement'|'navigation'} action
- * @param {string} category  e.g. 'form', 'cta', 'whatsapp', 'portfolio'
- * @param {string} [label]   Optional human-readable label
- */
 export function trackEvent(action, category, label) {
   if (!GA_ID && !IS_DEV) return;
 
@@ -47,6 +48,7 @@ export function trackEvent(action, category, label) {
     return;
   }
 
+  ensureGtag();
   if (typeof window.gtag !== 'function') return;
 
   window.gtag('event', action, {
@@ -56,9 +58,6 @@ export function trackEvent(action, category, label) {
   });
 }
 
-/**
- * Track a page view (call from router or on hash change if using hash navigation).
- */
 export function trackPageView(path) {
   if (!GA_ID && !IS_DEV) return;
 
@@ -67,6 +66,7 @@ export function trackPageView(path) {
     return;
   }
 
+  ensureGtag();
   if (typeof window.gtag !== 'function') return;
 
   window.gtag('config', GA_ID, {

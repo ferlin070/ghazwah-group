@@ -1,82 +1,111 @@
-/* Google Fonts are loaded via <link> in index.html for better performance */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Nakhoda Cloud Inspired Color Palette */
-  --ghz-black: #0a0a1f;
-  --ghz-black-deep: #1a0b2e;
-  --ghz-blue-deep: #0066ff;
-  --ghz-blue-electric: #00d4ff;
-  --ghz-purple: #6366f1;
-  --ghz-silver: #d1d5db;
-  --ghz-silver-muted: #9ca3af;
-  --ghz-red: #f43f5e;
-  --ghz-gold: #fbbf24;
-  --ghz-green: #10b981;
+  --ghz-black: #07111f;
+  --ghz-black-deep: #020817;
+  --ghz-blue-deep: #123b7a;
+  --ghz-blue-electric: #4f9cf9;
+  --ghz-purple: #475569;
+  --ghz-silver: #d7deea;
+  --ghz-silver-muted: #8a96a8;
+  --ghz-red: #d24b4b;
+  --ghz-gold: #d7a84f;
+  --ghz-green: #2fbf8f;
   --ghz-white: #ffffff;
-
-  /* Enhanced spacing scale for professional layouts */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-
-  /* Typography scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
 }
 
-/* Custom Scrollbar - Neon Style */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--ghz-black);
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--ghz-blue-electric), var(--ghz-purple));
-  border-radius: 10px;
-  transition: background 0.3s ease;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--ghz-blue-electric), var(--ghz-blue-deep));
-  box-shadow: 0 0 10px var(--ghz-blue-electric);
+html {
+  scroll-padding-top: 6rem;
 }
 
 body {
-  background: linear-gradient(135deg, var(--ghz-black) 0%, var(--ghz-black-deep) 100%);
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(79, 156, 249, 0.16), transparent 34rem),
+    radial-gradient(circle at 85% 8%, rgba(215, 168, 79, 0.09), transparent 28rem),
+    linear-gradient(180deg, var(--ghz-black-deep) 0%, var(--ghz-black) 46%, #050b14 100%);
   color: var(--ghz-white);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection styling with neon effect */
-::selection {
-  background-color: var(--ghz-blue-electric);
-  color: var(--ghz-black);
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Custom Utility Classes */
+::-webkit-scrollbar-track {
+  background: #050b14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1f4f91, #d7a84f);
+  border: 2px solid #050b14;
+  border-radius: 999px;
+}
+
+::selection {
+  background-color: rgba(79, 156, 249, 0.34);
+  color: var(--ghz-white);
+}
+
+@layer components {
+  .section-shell {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24;
+  }
+
+  .section-eyebrow {
+    @apply text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-ghz-gold;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.035em] text-ghz-white;
+  }
+
+  .section-copy {
+    @apply text-sm sm:text-base leading-7 text-ghz-silver-muted;
+  }
+
+  .surface-card {
+    @apply rounded-3xl border border-white/10 bg-white/[0.055] shadow-corporate backdrop-blur-xl;
+  }
+
+  .surface-card-soft {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] shadow-corporate-sm backdrop-blur-md;
+  }
+
+  .premium-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3.5 py-1.5 text-xs font-medium text-ghz-silver;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ghz-blue-electric px-6 py-3 text-sm font-semibold text-white shadow-blue-soft transition duration-300 hover:-translate-y-0.5 hover:bg-[#3b82e8] focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric focus-visible:ring-offset-2 focus-visible:ring-offset-ghz-black;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.055] px-6 py-3 text-sm font-semibold text-ghz-white transition duration-300 hover:-translate-y-0.5 hover:border-ghz-blue-electric/50 hover:bg-white/[0.09] focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric focus-visible:ring-offset-2 focus-visible:ring-offset-ghz-black;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ghz-gold px-6 py-3 text-sm font-semibold text-ghz-black-deep shadow-gold-soft transition duration-300 hover:-translate-y-0.5 hover:bg-[#e2b960] focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ghz-black;
+  }
+
+  .input-field {
+    @apply w-full rounded-2xl border border-white/10 bg-ghz-black-deep/70 px-4 py-3 text-sm text-ghz-white outline-none transition placeholder:text-ghz-silver-muted/55 focus:border-ghz-blue-electric/70 focus:ring-2 focus:ring-ghz-blue-electric/20;
+  }
+
+  .professional-link {
+    @apply text-ghz-silver-muted transition hover:text-ghz-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric focus-visible:ring-offset-2 focus-visible:ring-offset-ghz-black;
+  }
+}
+
 .circuit-line {
   stroke-dasharray: 8;
-  animation: dash 5s linear infinite;
+  animation: dash 8s linear infinite;
 }
 
 @keyframes dash {
@@ -85,172 +114,47 @@ body {
   }
 }
 
-/* =======================================
-   Neon Glow Effects - Nakhoda Cloud Style
-   =======================================
-*/
-.neon-glow {
-  box-shadow:
-    0 0 5px rgba(0, 212, 255, 0.3),
-    0 0 10px rgba(0, 212, 255, 0.2),
-    0 0 20px rgba(0, 212, 255, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.neon-glow:hover {
-  box-shadow:
-    0 0 10px rgba(0, 212, 255, 0.5),
-    0 0 20px rgba(0, 212, 255, 0.4),
-    0 0 40px rgba(0, 212, 255, 0.3),
-    0 0 60px rgba(0, 212, 255, 0.2);
-}
-
-.neon-text {
-  text-shadow:
-    0 0 10px rgba(0, 212, 255, 0.8),
-    0 0 20px rgba(0, 212, 255, 0.6),
-    0 0 30px rgba(0, 212, 255, 0.4);
-}
-
-.neon-border {
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  box-shadow:
-    inset 0 0 10px rgba(0, 212, 255, 0.1),
-    0 0 10px rgba(0, 212, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.neon-border:hover {
-  border-color: rgba(0, 212, 255, 0.6);
-  box-shadow:
-    inset 0 0 20px rgba(0, 212, 255, 0.2),
-    0 0 20px rgba(0, 212, 255, 0.4);
-}
-
-/* =======================================
-   Animated Gradient Border - Cyberpunk Style
-   =======================================
-*/
+.neon-glow,
+.neon-border,
+.glass-effect,
+.card-lift,
 .btn-gradient {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--ghz-blue-electric), var(--ghz-purple));
-  transition: all 0.4s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-gradient::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(135deg,
-    var(--ghz-blue-electric), var(--ghz-purple), var(--ghz-blue-deep), var(--ghz-gold), var(--ghz-blue-electric)
-  );
-  background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease, box-shadow 0.4s ease;
-  pointer-events: none;
-}
-
+.neon-glow:hover,
+.neon-border:hover,
+.glass-effect:hover,
+.card-lift:hover,
 .btn-gradient:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 10px 40px rgba(0, 212, 255, 0.3),
-    0 0 20px rgba(0, 212, 255, 0.2);
 }
 
-.btn-gradient:hover::before {
-  opacity: 1;
-  animation: gradient-shift 2.5s ease infinite;
-  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+.neon-text,
+.gradient-text,
+.gradient-text-animated {
+  background: linear-gradient(135deg, #eaf2ff, #4f9cf9 52%, #d7a84f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
 }
 
-@keyframes gradient-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* =======================================
-   Card Lift Effect - Nakhoda Cloud Style
-   =======================================
-*/
-.card-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-lift:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 20px 40px rgba(0, 212, 255, 0.2),
-    0 0 30px rgba(0, 212, 255, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-/* =======================================
-   Glassmorphism Effect - Enhanced
-   =======================================
-*/
-.glass-effect {
-  background: rgba(26, 11, 46, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 212, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.glass-effect:hover {
-  background: rgba(26, 11, 46, 0.6);
-  border-color: rgba(0, 212, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.15);
-}
-
-/* =======================================
-   Magnetic Cursor Effect
-   =======================================
-*/
-@media (hover: hover) {
-  .magnetic-hover {
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-}
-
-/* =======================================
-   Floating Tech Icons — Hero Section
-   =======================================
-   Gentle drift animation for background decorative icons.
-   Each variant (fast / slow) uses translateY oscillation.
-*/
 @keyframes icon-float-fast {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }
 
 @keyframes icon-float-slow {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
 }
 
-/* =======================================
-   Shimmer Effect for Loading States
-   =======================================
-*/
 @keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .shimmer {
@@ -259,140 +163,26 @@ body {
 }
 
 .shimmer::after {
-  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  animation: shimmer 2s infinite;
-}
-
-/* =======================================
-   Pulse Glow Animation - Cyberpunk
-   =======================================
-*/
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow:
-      0 0 5px rgba(0, 212, 255, 0.4),
-      0 0 10px rgba(0, 212, 255, 0.2),
-      0 0 15px rgba(0, 212, 255, 0.1);
-  }
-  50% {
-    box-shadow:
-      0 0 20px rgba(0, 212, 255, 0.6),
-      0 0 30px rgba(0, 212, 255, 0.4),
-      0 0 40px rgba(0, 212, 255, 0.2);
-  }
-}
-
-.pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-/* =======================================
-   Gradient Text Effect
-   =======================================
-*/
-.gradient-text {
-  background: linear-gradient(135deg, var(--ghz-blue-electric), var(--ghz-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-animated {
-  background: linear-gradient(90deg,
-    var(--ghz-blue-electric),
-    var(--ghz-purple),
-    var(--ghz-blue-deep),
-    var(--ghz-blue-electric)
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-flow 3s linear infinite;
-}
-
-@keyframes gradient-flow {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-
-/* =======================================
-   Radial Glow Backgrounds
-   =======================================
-*/
-.radial-glow-cyan {
-  position: relative;
-}
-
-.radial-glow-cyan::before {
+  inset: 0;
   content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(60px);
-  pointer-events: none;
-  z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  animation: shimmer 2.4s infinite;
 }
 
-.radial-glow-purple {
-  position: relative;
-}
-
-.radial-glow-purple::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* =======================================
-   3D Card Transform
-   =======================================
-*/
-.card-3d {
-  transform-style: preserve-3d;
-  transition: transform 0.1s ease-out;
-}
-
-.card-3d:hover {
-  transform: translateZ(20px);
-}
-
-/* =======================================
-   Smooth Transitions for Professional Feel
-   =======================================
-*/
 @media (prefers-reduced-motion: no-preference) {
-  * {
+  html {
     scroll-behavior: smooth;
   }
 }
 
-/* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
 }

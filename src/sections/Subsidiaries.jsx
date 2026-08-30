@@ -1,140 +1,129 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Server, ShoppingBag, TrendingUp, Sprout, ChevronRight } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronRight, Server, ShoppingBag, Sprout, TrendingUp } from 'lucide-react';
 import subsidiariesData from '../data/subsidiaries.json';
 
-// Mapping icons to subsidiary IDs
-const getIcon = (id) => {
-  switch (id) {
-    case 'ghazwah-cloud':
-      return <Server className="w-8 h-8 text-ghz-blue-electric" />;
-    case 'ghazwah-store':
-      return <ShoppingBag className="w-8 h-8 text-ghz-white" />;
-    case 'ghazwah-marketing':
-      return <TrendingUp className="w-8 h-8 text-ghz-red" />;
-    case 'agroteknologi':
-      return <Sprout className="w-8 h-8 text-emerald-500" />;
-    default:
-      return <Server className="w-8 h-8 text-ghz-blue-electric" />;
-  }
+const iconConfig = {
+  'ghazwah-cloud': {
+    icon: Server,
+    tone: 'text-ghz-blue-electric bg-ghz-blue-electric/10 ring-ghz-blue-electric/20',
+  },
+  'ghazwah-store': {
+    icon: ShoppingBag,
+    tone: 'text-ghz-gold bg-ghz-gold/10 ring-ghz-gold/20',
+  },
+  'ghazwah-marketing': {
+    icon: TrendingUp,
+    tone: 'text-ghz-red bg-ghz-red/10 ring-ghz-red/20',
+  },
+  agroteknologi: {
+    icon: Sprout,
+    tone: 'text-ghz-green bg-ghz-green/10 ring-ghz-green/20',
+  },
 };
 
 export default function Subsidiaries() {
-  const [activeCard, setActiveCard] = useState(null);
-
-  // Section animation variants
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
-    }
-  };
+  const [activeCard, setActiveCard] = useState(subsidiariesData[0]?.id ?? null);
 
   return (
     <motion.section
       id="syarikat"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-120px" }}
-      variants={sectionVariants}
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-b border-ghz-silver/5"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-120px' }}
+      transition={{ duration: 0.55 }}
+      className="section-shell border-b border-white/10"
     >
-      {/* Title */}
-      <div className="text-center mb-16">
-        <h2 className="font-display font-bold text-3xl sm:text-4xl text-ghz-white mb-4">
-          Ekosistem <span className="text-ghz-blue-electric">Anak Syarikat</span>
-        </h2>
-        <p className="font-sans text-sm text-ghz-silver/70 max-w-xl mx-auto">
-          Operasi strategik kami terbahagi kepada 4 cabang perniagaan bagi memaksimumkan impak dan sinergi industri.
-        </p>
-        <div className="w-16 h-1 bg-ghz-blue-electric mx-auto rounded-full mt-4"></div>
-      </div>
+      <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+        <div className="lg:sticky lg:top-28">
+          <p className="section-eyebrow">Operating model</p>
+          <h2 className="section-title mt-3">Empat cabang yang bergerak sebagai satu ekosistem.</h2>
+          <p className="section-copy mt-5">
+            Setiap cabang mempunyai fokus tersendiri, tetapi disusun untuk berkongsi teknologi,
+            data, pelanggan, dan peluang pasaran secara bersepadu.
+          </p>
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="surface-card-soft p-4">
+              <p className="font-display text-3xl font-semibold text-ghz-white">4</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-ghz-silver-muted">Cabang operasi</p>
+            </div>
+            <div className="surface-card-soft p-4">
+              <p className="font-display text-3xl font-semibold text-ghz-white">1</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-ghz-silver-muted">Induk strategi</p>
+            </div>
+          </div>
+        </div>
 
-      {/* Interactive Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {subsidiariesData.map((sub) => {
-          const isActive = activeCard === sub.id;
+        <div className="grid gap-5 md:grid-cols-2">
+          {subsidiariesData.map((sub, index) => {
+            const config = iconConfig[sub.id] ?? iconConfig['ghazwah-cloud'];
+            const Icon = config.icon;
+            const isActive = activeCard === sub.id;
 
-          return (
-            <motion.div
-              layout
-              key={sub.id}
-              onClick={() => setActiveCard(isActive ? null : sub.id)}
-              onMouseEnter={() => window.innerWidth >= 768 && setActiveCard(sub.id)}
-              onMouseLeave={() => window.innerWidth >= 768 && setActiveCard(null)}
-              className={`bg-ghz-blue-deep/10 border rounded-xl p-8 backdrop-blur-sm cursor-pointer transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${
-                isActive 
-                  ? 'border-ghz-blue-electric shadow-lg shadow-ghz-blue-electric/10 bg-ghz-blue-deep/20' 
-                  : 'border-ghz-silver/10 hover:border-ghz-blue-electric/30'
-              }`}
-              style={{ minHeight: '220px' }}
-            >
-              {/* Background gradient trace on active */}
-              {isActive && (
-                <div className="absolute top-0 right-0 w-32 h-32 bg-ghz-blue-electric/5 rounded-full blur-2xl pointer-events-none"></div>
-              )}
-
-              <div>
-                {/* Header: Icon + Name */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-lg bg-ghz-black/50 border border-ghz-silver/5">
-                    {getIcon(sub.id)}
+            return (
+              <motion.article
+                key={sub.id}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                onMouseEnter={() => setActiveCard(sub.id)}
+                className={`surface-card relative overflow-hidden p-6 transition ${
+                  isActive ? 'border-ghz-blue-electric/35 bg-white/[0.07]' : ''
+                }`}
+              >
+                <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-ghz-blue-electric/8 blur-3xl" />
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ring-1 ${config.tone}`}>
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ghz-silver-muted">
+                      Cabang {index + 1}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-mono text-ghz-silver/60 tracking-wider uppercase">
-                    Cabang Operasi
-                  </span>
-                </div>
 
-                {/* Title & Tagline */}
-                <h3 className="font-display font-bold text-xl text-ghz-white mb-1">
-                  {sub.name}
-                </h3>
-                <span className="text-xs font-mono text-ghz-blue-electric tracking-wide block mb-4 uppercase">
-                  {sub.tagline}
-                </span>
+                  <h3 className="mt-6 font-display text-xl font-semibold tracking-[-0.02em] text-ghz-white">
+                    {sub.name}
+                  </h3>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-ghz-gold">
+                    {sub.tagline}
+                  </p>
+                  <p className="mt-4 text-sm leading-7 text-ghz-silver-muted">{sub.description}</p>
 
-                {/* Short Description */}
-                <p className="font-sans text-sm text-ghz-silver/80 leading-relaxed">
-                  {sub.description}
-                </p>
+                  <button
+                    type="button"
+                    onClick={() => setActiveCard(isActive ? null : sub.id)}
+                    className="mt-6 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.16em] text-ghz-silver transition hover:border-ghz-blue-electric/40 hover:text-ghz-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric"
+                    aria-expanded={isActive}
+                  >
+                    Servis teras
+                    <ChevronRight className={`h-4 w-4 transition ${isActive ? 'rotate-90 text-ghz-blue-electric' : ''}`} />
+                  </button>
 
-                {/* Core Activities Lists (Expandable) */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: 'auto', opacity: 1, marginTop: 24 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="border-t border-ghz-silver/10 pt-4 overflow-hidden"
-                    >
-                      <h4 className="font-display font-semibold text-xs text-ghz-white mb-3 uppercase tracking-wider">
-                        Aktiviti & Servis Teras
-                      </h4>
-                      <ul className="space-y-3">
-                        {sub.details.map((detail, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-xs text-ghz-silver/80 leading-relaxed">
-                            <ChevronRight className="w-3.5 h-3.5 text-ghz-blue-electric flex-shrink-0 mt-0.5" />
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.ul
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28 }}
+                        className="space-y-3 overflow-hidden pt-4"
+                      >
+                        {sub.details.map((detail) => (
+                          <li key={detail} className="flex items-start gap-3 text-xs leading-6 text-ghz-silver-muted">
+                            <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-ghz-blue-electric" />
                             <span>{detail}</span>
                           </li>
                         ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Click Indicator for Mobile */}
-              <div className="mt-4 flex justify-end md:hidden">
-                <span className="text-[10px] font-mono text-ghz-silver/60">
-                  {isActive ? 'KLIK UNTUK TUTUP' : 'KLIK UNTUK BUTIRAN'}
-                </span>
-              </div>
-            </motion.div>
-          );
-        })}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </motion.section>
   );

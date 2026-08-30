@@ -21,8 +21,9 @@ Vercel adalah platform paling mudah untuk menempatkan aplikasi React + Vite seca
      * **Output Directory**: `dist`
 4. **Masukkan Environment Variable (PENTING)**:
    * Di bawah seksyen **"Environment Variables"**, tambahkan pembolehubah berikut:
-     * **Key**: `VITE_GEMINI_API_KEY`
+     * **Key**: `GEMINI_API_KEY`
      * **Value**: *[Masukkan API Key Gemini anda dari Google AI Studio]*
+   * `GEMINI_API_KEY` digunakan oleh proxy server-side `/api/gemini` dan tidak akan dihantar ke browser.
 5. **Klik Deploy**:
    * Vercel akan membina dan menyediakan subdomain percuma (contoh: `ghazwahgroup.vercel.app`).
    * Anda boleh menghubungkan domain rasmi `ghazwahgroup.com` melalui tab **Settings > Domains** di Vercel.
@@ -75,7 +76,7 @@ Kami telah menyediakan `Dockerfile` sedia ada untuk pembungkusan kontena.
    docker run -d -p 8080:80 --name ghazwah-site-container ghazwah-website
    ```
 
-*Nota: Pastikan API Key diuruskan menerusi parameter `-e VITE_GEMINI_API_KEY=xxx` semasa membina atau menjalankan kontena sekiranya API Key diperlukan.*
+*Nota: Pastikan API Key diuruskan menerusi parameter `-e GEMINI_API_KEY=xxx` atau pembolehubah persekitaran server-side yang setara semasa membina atau menjalankan kontena.*
 
 ---
 

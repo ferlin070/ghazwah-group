@@ -1,41 +1,50 @@
 import React from 'react';
-import { ShieldCheck, Building2, Award } from 'lucide-react';
+import { Award, Building2, ShieldCheck } from 'lucide-react';
 
 const trustItems = [
   {
-    icon: <Building2 className="w-4 h-4 text-emerald-500" />,
+    icon: Building2,
     text: 'SSM: 202603084068 (003836930-K)',
-    label: 'Syarikat Berdaftar'
+    label: 'Syarikat Berdaftar',
   },
   {
-    icon: <ShieldCheck className="w-4 h-4 text-ghz-blue-electric" />,
+    icon: ShieldCheck,
     text: 'Inkubator DFK TVETMARA Besut',
-    label: 'Institusi Teknikal'
+    label: 'Institusi Teknikal',
   },
   {
-    icon: <Award className="w-4 h-4 text-ghz-red" />,
+    icon: Award,
     text: '10 Produk Siap • 8 Ejen AI',
-    label: 'Berskala Industri'
-  }
+    label: 'Berskala Industri',
+  },
 ];
 
 export default function TrustBar() {
   return (
-    <div
-      className="relative z-10 w-full bg-ghz-black/90 border-b border-ghz-silver/5 py-3"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
-          {trustItems.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-2 text-[11px] font-mono text-ghz-silver/70"
-            >
-              <span className="flex-shrink-0">{item.icon}</span>
-              <span className="hidden sm:inline">{item.text}</span>
-              <span className="sm:hidden">{item.label}</span>
-            </div>
-          ))}
+    <div className="relative z-10 border-y border-white/10 bg-ghz-black-deep/60 py-4 backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-3 sm:grid-cols-3">
+          {trustItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.label}
+                className="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-center"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ghz-blue-electric/10 text-ghz-blue-electric ring-1 ring-ghz-blue-electric/20">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span className="min-w-0 text-left">
+                  <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-ghz-gold">
+                    {item.label}
+                  </span>
+                  <span className="block truncate text-xs font-medium text-ghz-silver sm:text-sm">
+                    {item.text}
+                  </span>
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

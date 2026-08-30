@@ -1,289 +1,309 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, GitBranch, ShieldCheck, Mail, MapPin, Phone, MessageSquare, ExternalLink, CheckCircle, TrendingUp, Clock, Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  ArrowUpRight,
+  CheckCircle,
+  Clock,
+  ExternalLink,
+  GitBranch,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp,
+  Zap,
+} from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 
+const initialFormData = {
+  name: '',
+  company: '',
+  collabType: 'Kerjasama Teknologi',
+  message: '',
+};
+
+const valueProps = [
+  {
+    icon: Sparkles,
+    title: 'Automasi AI untuk operasi harian',
+    description: '8 ejen AI khusus membantu kewangan, pemasaran, jualan dan sokongan teknikal secara 24/7.',
+  },
+  {
+    icon: GitBranch,
+    title: 'Sinergi ekosistem bersepadu',
+    description: 'Cloud, e-dagang, pemasaran dan agroteknologi digerakkan sebagai satu rangkaian operasi.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Produk siap skala industri',
+    description: '10 penyelesaian teknologi sedia digunakan untuk PKS, F&B, servis, kesihatan dan infrastruktur.',
+  },
+];
+
+const roiMetrics = [
+  {
+    icon: Zap,
+    value: '70%',
+    label: 'Penjimatan kos operasi',
+    desc: 'Automasi AI mengurangkan kerja manual berulang.',
+  },
+  {
+    icon: TrendingUp,
+    value: '24/7',
+    label: 'Operasi tanpa henti',
+    desc: 'Sokongan AI dan cloud sentiasa tersedia.',
+  },
+  {
+    icon: Clock,
+    value: '60s',
+    label: 'Web instant',
+    desc: 'Idea ke laman responsif melalui prompt teks.',
+  },
+  {
+    icon: ShieldCheck,
+    value: '4',
+    label: 'Cabang sinergi',
+    desc: 'Satu induk menghubungkan empat operasi utama.',
+  },
+];
+
+const contactCards = [
+  {
+    icon: MapPin,
+    title: 'Pejabat & Inkubator',
+    body: (
+      <p>
+        Inkubator DFK (Ghazwah Group),<br />
+        Institut Kemahiran MARA Besut (TVETMARA Besut),<br />
+        Jalan Batu Tumbuh, Alor Lintang,<br />
+        22200 Kampung Raja, Terengganu.
+      </p>
+    ),
+  },
+  {
+    icon: Mail,
+    title: 'E-mel Rasmi',
+    body: (
+      <a href="mailto:ghazwahgroup@gmail.com" className="text-ghz-blue-electric transition hover:text-ghz-white">
+        ghazwahgroup@gmail.com
+      </a>
+    ),
+  },
+];
+
 export default function CollabAndContact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    company: '',
-    collabType: 'Kerjasama Teknologi',
-    message: ''
-  });
+  const [formData, setFormData] = useState(initialFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Parse ?product= query from hash fragment (#hubungi?product=...)
-  // Portfolio CTAs link to this format so the product name is pre-filled.
   useEffect(() => {
-    const hash = window.location.hash;                      // e.g. "#hubungi?product=Smart+Caregiver"
-    const queryPart = hash.includes('?') ? hash.split('?')[1] : '';
-    const params = new URLSearchParams(queryPart);
-    const productName = params.get('product');
-    if (productName) {
-      setFormData(prev => ({
+    const applyProductInquiry = (productName) => {
+      if (!productName) return;
+
+      setFormData((prev) => ({
         ...prev,
-        message: `Saya berminat untuk mendapatkan maklumat lanjut mengenai produk: ${productName}\n\n(Boleh mula taip di sini...)`
+        message: `Saya berminat untuk mendapatkan maklumat lanjut mengenai produk: ${productName}\n\n(Boleh mula taip di sini...)`,
       }));
-    }
+      setIsSubmitted(false);
+    };
+
+    const scrollToContact = () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.requestAnimationFrame(() => {
+        document.getElementById('hubungi')?.scrollIntoView({
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'start',
+        });
+      });
+    };
+
+    const applyProductPrefill = () => {
+      const hash = window.location.hash;
+      const queryPart = hash.includes('?') ? hash.split('?')[1] : '';
+      const params = new URLSearchParams(queryPart);
+      applyProductInquiry(params.get('product'));
+
+      if (hash.startsWith('#hubungi?')) {
+        scrollToContact();
+      }
+    };
+
+    const handleProductInquiry = (event) => {
+      applyProductInquiry(event.detail?.productName);
+    };
+
+    applyProductPrefill();
+    window.addEventListener('hashchange', applyProductPrefill);
+    window.addEventListener('ghazwah:product-inquiry', handleProductInquiry);
+    return () => {
+      window.removeEventListener('hashchange', applyProductPrefill);
+      window.removeEventListener('ghazwah:product-inquiry', handleProductInquiry);
+    };
   }, []);
 
-  const valueProps = [
-    {
-      icon: <Sparkles className="w-6 h-6 text-ghz-red" />,
-      title: "Penjimatan Kos AI Ejen 70%",
-      description: "Automasi kerja pintar 24/7 menggunakan 8 ejen AI khusus (termasuk kewangan, pemasaran, dan jualan) yang mengurangkan kos operasi sehingga 70%."
-    },
-    {
-      icon: <GitBranch className="w-6 h-6 text-ghz-blue-electric" />,
-      title: "Sinergi Ekosistem Bersepadu",
-      description: "Integrasi menyeluruh 4 anak syarikat merentasi DevOps Cloud, e-dagang gaya hidup, agroteknologi moden, dan pemasaran digital melahirkan ekosistem berimpak tinggi."
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />,
-      title: "10 Produk Siap Skala Industri",
-      description: "Keupayaan teknikal yang terbukti menerusi kejayaan melancarkan 10 produk teknologi siap untuk menyokong operasi PKS, hospitaliti, dan agrikultur."
-    }
-  ];
-
-  const roiMetrics = [
-    {
-      icon: <Zap className="w-5 h-5 text-ghz-blue-electric" />,
-      value: '70%',
-      label: 'Penjimatan Kos Operasi',
-      desc: 'Automasi AI menggantikan kerja manual berulang'
-    },
-    {
-      icon: <TrendingUp className="w-5 h-5 text-emerald-500" />,
-      value: '24/7',
-      label: 'Operasi Tanpa Henti',
-      desc: 'Ejen AI dan infrastruktur awan bertindak 24 jam sehari'
-    },
-    {
-      icon: <Clock className="w-5 h-5 text-ghz-red" />,
-      value: '10x',
-      label: 'Kepantasan Pembangunan',
-      desc: 'Daripada idea ke produk siap dalam masa 60 saat (Web Instant)'
-    },
-    {
-      icon: <ShieldCheck className="w-5 h-5 text-amber-500" />,
-      value: '4',
-      label: 'Cabang Sinergi',
-      desc: '4 anak syarikat beroperasi di bawah satu ekosistem bersepadu'
-    }
-  ];
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.message.trim()) return;
-    setIsSubmitted(true);
-    trackEvent('conversion', 'form_submit', 'Hubungi Kami');
-  };
-
-  // Generate pre-filled WhatsApp link
   const getWhatsAppLink = () => {
-    const phone = "60195132821"; // Talian Utama
+    const phone = '60195132821';
     const text = `Salam sejahtera Ghazwah Group,\n\nNama saya *${formData.name}* dari syarikat *${formData.company || 'Persendirian'}*.\n\nSaya berminat untuk berkolaborasi dalam bidang *${formData.collabType}*.\n\nMesej/Pertanyaan:\n"${formData.message}"\n\n(Dihantar dari Laman Web Korporat Ghazwah Group)`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   };
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!formData.name.trim() || !formData.message.trim()) return;
+
+    setIsSubmitted(true);
+    trackEvent('conversion', 'form_submit', 'Hubungi Kami');
   };
 
   return (
     <>
-      {/* SECTION: Kenapa Collab Dengan Kami — now with ROI metrics strip */}
       <motion.section
         id="collab"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-120px" }}
-        variants={sectionVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-b border-ghz-silver/5"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-120px' }}
+        transition={{ duration: 0.55 }}
+        className="section-shell border-b border-white/10"
       >
-        <div className="text-center mb-12">
-          <span className="text-xs font-mono text-ghz-red tracking-[0.2em] uppercase block mb-2">
-            PELUANG PERTUMBUHAN & KOLABORASI
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-ghz-white mb-4">
-            ROI & <span className="text-ghz-blue-electric">Kelebihan Strategik</span>
-          </h2>
-          <p className="font-sans text-sm text-ghz-silver/70 max-w-xl mx-auto">
-            Kami buktikan nilai kolaborasi dengan data — bukan sekadar janji.
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="section-eyebrow">Peluang kolaborasi</p>
+          <h2 className="section-title mt-3">Bina projek digital dengan rakan teknologi yang lengkap.</h2>
+          <p className="section-copy mt-5">
+            Ghazwah Group sesuai untuk organisasi yang memerlukan gabungan produk siap,
+            infrastruktur cloud, automasi AI dan sokongan komersial dalam satu pasukan.
           </p>
-          <div className="w-16 h-1 bg-ghz-blue-electric mx-auto rounded-full mt-4"></div>
         </div>
 
-        {/* ROI Metrics Strip — animated counters */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {roiMetrics.map((metric, idx) => (
-            <div
-              key={idx}
-              className="bg-ghz-blue-deep/10 border border-ghz-silver/10 rounded-xl p-6 text-center hover:border-ghz-blue-electric/30 transition-all duration-300"
-            >
-              <div className="flex justify-center mb-3">
-                <div className="p-2 rounded-lg bg-ghz-black/50 border border-ghz-silver/5">
-                  {metric.icon}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {roiMetrics.map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="surface-card-soft p-5 text-center">
+                <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-ghz-blue-electric/10 text-ghz-blue-electric ring-1 ring-ghz-blue-electric/20">
+                  <Icon className="h-5 w-5" />
                 </div>
+                <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-ghz-white">{metric.value}</p>
+                <h3 className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-ghz-gold">{metric.label}</h3>
+                <p className="mt-3 text-xs leading-6 text-ghz-silver-muted">{metric.desc}</p>
               </div>
-              <div className="font-mono text-2xl sm:text-3xl font-bold text-ghz-white tracking-tight mb-1">
-                {metric.value}
-              </div>
-              <div className="font-display font-semibold text-xs text-ghz-white/90 uppercase tracking-wider mb-1">
-                {metric.label}
-              </div>
-              <p className="font-sans text-[10px] text-ghz-silver/60 leading-relaxed">
-                {metric.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Value Props Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {valueProps.map((prop, idx) => (
-            <div
-              key={idx}
-              className="bg-ghz-blue-deep/10 border border-ghz-silver/10 hover:border-ghz-blue-electric/30 rounded-xl p-8 backdrop-blur-sm relative overflow-hidden transition-all duration-300 group"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-ghz-blue-electric/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="p-3 rounded-lg bg-ghz-black/50 border border-ghz-silver/5 w-fit mb-6">
-                {prop.icon}
-              </div>
-              <h3 className="font-display font-bold text-lg text-ghz-white mb-3">
-                {prop.title}
-              </h3>
-              <p className="font-sans text-xs sm:text-sm text-ghz-silver/70 leading-relaxed">
-                {prop.description}
-              </p>
-            </div>
-          ))}
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {valueProps.map((prop) => {
+            const Icon = prop.icon;
+            return (
+              <article key={prop.title} className="surface-card relative overflow-hidden p-6">
+                <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-ghz-blue-electric/10 blur-3xl" />
+                <div className="relative z-10">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.05] text-ghz-blue-electric ring-1 ring-white/10">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-ghz-white">{prop.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-ghz-silver-muted">{prop.description}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
-        {/* Mid-section Trust CTA */}
-        <div className="text-center">
+        <div className="mt-10 flex justify-center">
           <a
             href="#hubungi"
             onClick={() => trackEvent('conversion', 'cta_click', 'Collab — Bincang Peluang')}
-            className="inline-flex items-center gap-2 bg-ghz-red hover:bg-ghz-red/90 text-ghz-white px-8 py-4 rounded-md text-base font-bold transition-all duration-300 transform hover:scale-[1.03] shadow-lg shadow-ghz-red/20 btn-gradient"
+            className="btn-primary"
           >
-            <MessageSquare className="w-5 h-5" />
+            <MessageSquare className="h-5 w-5" />
             Bincang Peluang Kolaborasi
+            <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
       </motion.section>
 
-      {/* SECTION: Hubungi Kami — with 'Book a Call' prompt */}
       <motion.section
         id="hubungi"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-120px" }}
-        variants={sectionVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-120px' }}
+        transition={{ duration: 0.55 }}
+        className="section-shell"
       >
-        <div className="text-center mb-16">
-          <span className="text-xs font-mono text-ghz-blue-electric tracking-[0.2em] uppercase block mb-2">
-            MULAKAN PERBUALAN
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-ghz-white mb-4">
-            Hubungi <span className="text-ghz-blue-electric">Kami</span>
-          </h2>
-          <p className="font-sans text-sm text-ghz-silver/70 max-w-xl mx-auto">
-            Isi borang di bawah atau terus WhatsApp kami. Maklum balas dalam masa 24 jam.
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="section-eyebrow">Mulakan perbualan</p>
+          <h2 className="section-title mt-3">Hubungi pasukan Ghazwah Group.</h2>
+          <p className="section-copy mt-5">
+            Isi ringkasan projek dan kami akan sediakan mesej WhatsApp berstruktur untuk dihantar
+            terus kepada pasukan utama Ghazwah Group.
           </p>
-          <div className="w-16 h-1 bg-ghz-blue-electric mx-auto rounded-full mt-4"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Left Column: Contact Cards */}
-          <div className="lg:col-span-5 flex flex-col gap-6 w-full">
-            
-            {/* Address */}
-            <div className="bg-ghz-blue-deep/10 border border-ghz-silver/10 rounded-xl p-6 flex gap-4 items-start">
-              <div className="p-2.5 rounded bg-ghz-blue-deep/40 text-ghz-blue-electric flex-shrink-0">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div>                    <h3 className="font-display font-semibold text-sm text-ghz-white mb-1">Pejabat & Inkubator</h3>
-                <p className="font-sans text-xs sm:text-sm text-ghz-silver/70 leading-relaxed">
-                  Inkubator DFK (Ghazwah Group),<br />
-                  Institut Kemahiran MARA Besut (TVETMARA Besut),<br />
-                  Jalan Batu Tumbuh, Alor Lintang,<br />
-                  22200 Kampung Raja, Terengganu.
-                </p>
-              </div>
-            </div>
+        <div className="mt-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="space-y-4">
+            {contactCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <article key={card.title} className="surface-card-soft flex gap-4 p-5">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ghz-blue-electric/10 text-ghz-blue-electric ring-1 ring-ghz-blue-electric/20">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-base font-semibold text-ghz-white">{card.title}</h3>
+                    <div className="mt-2 text-sm leading-7 text-ghz-silver-muted">{card.body}</div>
+                  </div>
+                </article>
+              );
+            })}
 
-            {/* Email */}
-            <div className="bg-ghz-blue-deep/10 border border-ghz-silver/10 rounded-xl p-6 flex gap-4 items-start">
-              <div className="p-2.5 rounded bg-ghz-blue-deep/40 text-ghz-blue-electric flex-shrink-0">
-                <Mail className="w-5 h-5" />
+            <article className="surface-card-soft p-5">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-ghz-green/10 text-ghz-green ring-1 ring-ghz-green/20">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-display text-base font-semibold text-ghz-white">WhatsApp Direct</h3>
+                  <p className="text-xs text-ghz-silver-muted">Talian utama untuk pertanyaan pantas.</p>
+                </div>
               </div>
-              <div>                    <h3 className="font-display font-semibold text-sm text-ghz-white mb-1">E-mel Rasmi</h3>
-                <a href="mailto:ghazwahgroup@gmail.com" className="font-mono text-xs sm:text-sm text-ghz-blue-electric hover:underline block mt-1">
-                  ghazwahgroup@gmail.com
+              <div className="space-y-2">
+                <a
+                  href="https://wa.me/60195132821"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('conversion', 'whatsapp_click', 'Talian Utama')}
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-ghz-silver transition hover:border-ghz-green/40 hover:text-ghz-white"
+                >
+                  <span className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-ghz-green" />
+                    Talian Utama: 019-513 2821
+                  </span>
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://wa.me/601115014037"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('conversion', 'whatsapp_click', 'Talian Kedua')}
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-ghz-silver transition hover:border-ghz-green/40 hover:text-ghz-white"
+                >
+                  <span className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-ghz-green" />
+                    Talian Kedua: +60 11-1501 4037
+                  </span>
+                  <ExternalLink className="h-4 w-4" />
                 </a>
               </div>
-            </div>
-
-            {/* WhatsApp Buttons */}
-            <div className="bg-ghz-blue-deep/10 border border-ghz-silver/10 rounded-xl p-6">
-              <div className="flex gap-4 items-start mb-4">
-                <div className="p-2.5 rounded bg-ghz-blue-deep/40 text-ghz-blue-electric flex-shrink-0">
-                  <Phone className="w-5 h-5" />
-                </div>
-                <div>                    <h3 className="font-display font-semibold text-sm text-ghz-white mb-1">WhatsApp Direct</h3>
-                  <p className="font-sans text-xs text-ghz-silver/50 leading-tight">
-                    Sila hubungi talian sokongan kami di bawah:
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-              <a
-                href="https://wa.me/60195132821"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent('conversion', 'whatsapp_click', 'Talian Utama')}
-                className="flex items-center justify-between bg-ghz-black border border-ghz-silver/10 hover:border-emerald-500/50 hover:bg-emerald-950/10 px-4 py-3 rounded-lg text-xs font-mono text-ghz-silver hover:text-white transition-all"
-              >
-                <span className="flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-emerald-500" />
-                  Talian Utama: 019-513 2821
-                </span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href="https://wa.me/601115014037"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent('conversion', 'whatsapp_click', 'Talian Kedua')}
-                className="flex items-center justify-between bg-ghz-black border border-ghz-silver/10 hover:border-emerald-500/50 hover:bg-emerald-950/10 px-4 py-3 rounded-lg text-xs font-mono text-ghz-silver hover:text-white transition-all"
-              >
-                <span className="flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-emerald-500" />
-                  Talian Kedua: +60 11-1501 4037
-                </span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              </div>
-            </div>
-
+            </article>
           </div>
 
-          {/* Right Column: Inquiry Form */}
-          <div className="lg:col-span-7 bg-ghz-blue-deep/10 border border-ghz-silver/10 rounded-xl p-8 backdrop-blur-sm w-full relative">
-            
+          <div className="surface-card relative overflow-hidden p-6 sm:p-8">
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-ghz-blue-electric/10 blur-3xl" />
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
                 <motion.form
@@ -292,11 +312,11 @@ export default function CollabAndContact() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="space-y-6"
+                  className="relative z-10 space-y-5"
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-ghz-silver mb-2">
+                      <label htmlFor="contact-name" className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ghz-silver">
                         Nama Penuh *
                       </label>
                       <input
@@ -307,11 +327,11 @@ export default function CollabAndContact() {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Contoh: Ali Bin Abu"
-                        className="w-full px-4 py-3 bg-ghz-black/50 border border-ghz-silver/15 focus:border-ghz-blue-electric rounded text-sm text-ghz-white outline-none transition-all placeholder-ghz-silver/30"
+                        className="input-field"
                       />
                     </div>
                     <div>
-                      <label htmlFor="contact-company" className="block text-xs font-mono uppercase tracking-wider text-ghz-silver mb-2">
+                      <label htmlFor="contact-company" className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ghz-silver">
                         Syarikat / Organisasi
                       </label>
                       <input
@@ -321,13 +341,13 @@ export default function CollabAndContact() {
                         value={formData.company}
                         onChange={handleInputChange}
                         placeholder="Contoh: Maju Sdn Bhd"
-                        className="w-full px-4 py-3 bg-ghz-black/50 border border-ghz-silver/15 focus:border-ghz-blue-electric rounded text-sm text-ghz-white outline-none transition-all placeholder-ghz-silver/30"
+                        className="input-field"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="contact-collab-type" className="block text-xs font-mono uppercase tracking-wider text-ghz-silver mb-2">
+                    <label htmlFor="contact-collab-type" className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ghz-silver">
                       Jenis Kolaborasi
                     </label>
                     <select
@@ -335,7 +355,7 @@ export default function CollabAndContact() {
                       name="collabType"
                       value={formData.collabType}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-ghz-black border border-ghz-silver/15 focus:border-ghz-blue-electric rounded text-sm text-ghz-white outline-none transition-all cursor-pointer"
+                      className="input-field cursor-pointer"
                     >
                       <option value="Kerjasama Teknologi">Kerjasama Teknologi (Tech Partnership)</option>
                       <option value="Pelaburan Strategik">Pelaburan Strategik (Investment)</option>
@@ -345,72 +365,68 @@ export default function CollabAndContact() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-wider text-ghz-silver mb-2">
+                    <label htmlFor="contact-message" className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ghz-silver">
                       Mesej / Pertanyaan *
                     </label>
                     <textarea
                       id="contact-message"
                       name="message"
                       required
-                      rows="4"
+                      rows="5"
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Tulis mesej atau cadangan kolaborasi anda di sini..."
-                      className="w-full px-4 py-3 bg-ghz-black/50 border border-ghz-silver/15 focus:border-ghz-blue-electric rounded text-sm text-ghz-white outline-none transition-all placeholder-ghz-silver/30 resize-y"
-                    ></textarea>
+                      className="input-field resize-y"
+                    />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full bg-ghz-red hover:bg-ghz-red/90 text-ghz-white py-3.5 rounded font-display font-semibold transition-all duration-300 transform hover:scale-[1.01] shadow-lg shadow-ghz-red/10 flex items-center justify-center gap-2 btn-gradient"
-                  >
-                    Hantar Pertanyaan
+                  <button type="submit" className="btn-gold w-full">
+                    Sediakan Mesej WhatsApp
+                    <ArrowUpRight className="h-4 w-4" />
                   </button>
                 </motion.form>
               ) : (
                 <motion.div
                   key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-10 flex flex-col items-center gap-6"
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  className="relative z-10 flex flex-col items-center py-10 text-center"
                 >
-                  <CheckCircle className="w-16 h-16 text-emerald-500 animate-bounce" />
-                  <div>
-                    <h3 className="font-display font-bold text-xl text-ghz-white mb-2">
-                      Permohonan Berjaya Dihantar!
-                    </h3>
-                    <p className="font-sans text-xs sm:text-sm text-ghz-silver/70 max-w-md mx-auto leading-relaxed">
-                      Maklumat anda telah direkodkan dalam sistem. Untuk maklum balas segera 24/7, sila klik butang di bawah untuk menghantar mesej terus ke WhatsApp kami.
-                    </p>
+                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-ghz-green/10 text-ghz-green ring-1 ring-ghz-green/20">
+                    <CheckCircle className="h-8 w-8" />
                   </div>
-
-                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm">
+                  <h3 className="mt-6 font-display text-2xl font-semibold text-ghz-white">Mesej WhatsApp sudah disediakan.</h3>
+                  <p className="mt-3 max-w-md text-sm leading-7 text-ghz-silver-muted">
+                    Maklumat ini belum dihantar ke sistem kami. Klik butang WhatsApp di bawah
+                    untuk membuka mesej yang telah diisi awal dan hantar sendiri kepada pasukan Ghazwah Group.
+                  </p>
+                  <div className="mt-7 flex w-full max-w-md flex-col gap-3 sm:flex-row">
                     <a
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackEvent('conversion', 'whatsapp_click', 'Form Success — Kirim ke WhatsApp')}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-ghz-white px-6 py-3.5 rounded font-display font-semibold transition-all shadow-md shadow-emerald-600/20"
+                      className="btn-primary flex-1"
                     >
-                      <MessageSquare className="w-4 h-4" />
-                      Kirim ke WhatsApp
+                      <MessageSquare className="h-4 w-4" />
+                      Buka WhatsApp
                     </a>
                     <button
+                      type="button"
                       onClick={() => {
                         setIsSubmitted(false);
-                        setFormData({ name: '', company: '', collabType: 'Kerjasama Teknologi', message: '' });
+                        setFormData(initialFormData);
                       }}
-                      className="w-full sm:w-auto inline-flex items-center justify-center text-xs text-ghz-silver/50 hover:text-white px-4 py-2 hover:bg-ghz-blue-deep/30 rounded transition-all font-mono"
+                      className="btn-secondary flex-1"
                     >
-                      ISI BORANG SEMULA
+                      Isi Semula
                     </button>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
-
           </div>
-
         </div>
       </motion.section>
     </>

@@ -6,8 +6,6 @@ import Hero from './sections/Hero';
 import TrustBar from './components/TrustBar';
 import { initGA, trackPageView } from './utils/analytics';
 
-// Code-split below-the-fold sections to reduce initial JS bundle size.
-// Vite will create separate chunks loaded only when each section scrolls into view.
 const StatsStrip = lazy(() => import('./components/StatsStrip'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const About = lazy(() => import('./sections/About'));
@@ -17,17 +15,17 @@ const CollabAndContact = lazy(() => import('./sections/CollabAndContact'));
 const ChatbotWidget = lazy(() => import('./components/ChatbotWidget'));
 const Footer = lazy(() => import('./components/Footer'));
 
-// Minimal placeholder for lazy-loaded sections
 function SectionFallback() {
   return (
-    <div className="w-full h-32 bg-ghz-black animate-pulse" />
+    <div className="section-shell py-8" aria-hidden="true">
+      <div className="surface-card-soft shimmer h-28" />
+    </div>
   );
 }
 
 export default function App() {
   useEffect(() => {
     initGA();
-    // Track initial page view + subsequent hash changes
     trackPageView();
     const handleHashChange = () => trackPageView();
     window.addEventListener('hashchange', handleHashChange);
@@ -35,19 +33,13 @@ export default function App() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-ghz-black text-ghz-white selection:bg-ghz-blue-electric selection:text-ghz-white">
-      {/* Sticky Header Navigation — always visible, static import */}
+    <div className="min-h-screen overflow-hidden bg-ghz-black text-ghz-white selection:bg-ghz-blue-electric/40 selection:text-ghz-white">
       <Navbar />
 
-      {/* Main Sections */}
-      <main className="flex-grow">
-        {/* Hero Section — above fold, static import */}
+      <main>
         <Hero />
-
-        {/* Trust Bar — trust signals, SSM reg, always visible */}
         <TrustBar />
 
-        {/* Below-the-fold sections loaded on demand via React.lazy */}
         <Suspense fallback={<SectionFallback />}>
           <StatsStrip />
         </Suspense>
@@ -81,10 +73,7 @@ export default function App() {
         <Footer />
       </Suspense>
 
-      {/* Vercel Analytics — page views and web vitals */}
       <Analytics />
-
-      {/* Vercel Speed Insights — Core Web Vitals monitoring */}
       <SpeedInsights />
     </div>
   );

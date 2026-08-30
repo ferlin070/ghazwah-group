@@ -1,32 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
     quote: 'Kolaborasi bersama Ghazwah Group membuka akses kami kepada infrastruktur awan dan automasi AI yang sebelum ini sukar dijangkau. Pasukan mereka sangat profesional dan responsif.',
     author: 'Pengurus IT',
     company: 'Syarikat PKS Terengganu',
-    rating: 5
+    rating: 5,
   },
   {
     quote: 'Sistem POS dan HR mereka membantu kami mengurangkan masa pengurusan operasi sebanyak 60%. Kami kini boleh fokus pada pengembangan perniagaan.',
     author: 'Pengarah Operasi',
     company: 'Rantaian F&B Malaysia Timur',
-    rating: 5
+    rating: 5,
   },
   {
     quote: 'Ekosistem 4 anak syarikat di bawah satu induk memberi kami penyelesaian menyeluruh — dari hosting hingga pemasaran digital. Sangat menjimatkan kos dan masa.',
     author: 'Usahawan Teknologi',
     company: 'Inkubator Startup Kuala Lumpur',
-    rating: 5
+    rating: 5,
   },
   {
     quote: 'Perkhidmatan perundingan akademik mereka sangat membantu pelajar kami dalam projek perkomputeran awan. Kerjasama ini akan diteruskan.',
     author: 'Ts. Mohd Zubir bin Md Zin',
     company: 'Penasihat Teknikal TVETMARA',
-    rating: 5
-  }
+    rating: 5,
+  },
 ];
 
 export default function Testimonials() {
@@ -35,109 +35,114 @@ export default function Testimonials() {
 
   const next = useCallback(() => {
     setDirection(1);
-    setCurrent(prev => (prev + 1) % testimonials.length);
+    setCurrent((prev) => (prev + 1) % testimonials.length);
   }, []);
 
   const prev = useCallback(() => {
     setDirection(-1);
-    setCurrent(prev => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   }, []);
 
-  // Auto-slide every 6s
   useEffect(() => {
-    const interval = setInterval(next, 6000);
+    const interval = setInterval(next, 7000);
     return () => clearInterval(interval);
   }, [next]);
 
   const variants = {
-    enter: (dir) => ({ x: dir > 0 ? 200 : -200, opacity: 0 }),
+    enter: (dir) => ({ x: dir > 0 ? 48 : -48, opacity: 0 }),
     center: { x: 0, opacity: 1 },
-    exit: (dir) => ({ x: dir > 0 ? -200 : 200, opacity: 0 })
+    exit: (dir) => ({ x: dir > 0 ? -48 : 48, opacity: 0 }),
   };
 
-  return (
-    <section className="relative w-full bg-gradient-to-b from-ghz-black via-ghz-blue-deep/5 to-ghz-black py-20 overflow-hidden border-y border-ghz-silver/5">
-      {/* Decorative glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-ghz-blue-electric/3 blur-[100px] pointer-events-none"></div>
+  const testimonial = testimonials[current];
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-[10px] font-mono text-ghz-blue-electric tracking-[0.2em] uppercase block mb-3">
-            TESTIMONIALS
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-ghz-white mb-3">
-            Apa Kata <span className="text-ghz-blue-electric">Rakan Strategik</span>
-          </h2>
-          <p className="font-sans text-sm text-ghz-silver/70 max-w-lg mx-auto">
-            Kepuasan rakan kolaborasi dan pelanggan adalah bukti komitmen kami terhadap kecemerlangan.
+  return (
+    <section className="relative overflow-hidden border-y border-white/10 bg-ghz-black-deep/45">
+      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-ghz-blue-electric/8 blur-[120px]" />
+
+      <div className="section-shell relative z-10">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="section-eyebrow">Social proof</p>
+          <h2 className="section-title mt-3">Dipercayai oleh rakan industri dan institusi.</h2>
+          <p className="section-copy mt-4">
+            Maklum balas ini menggambarkan standard operasi yang kami sasarkan dalam setiap
+            kolaborasi: responsif, tersusun, dan berorientasikan hasil.
           </p>
         </div>
 
-        <div className="relative min-h-[220px] flex items-center justify-center">
+        <div className="relative mx-auto mt-12 max-w-4xl">
           <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
+            <motion.article
               key={current}
               custom={direction}
               variants={variants}
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="bg-ghz-blue-deep/10 border border-ghz-silver/10 rounded-2xl p-8 sm:p-10 backdrop-blur-sm w-full"
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="surface-card relative overflow-hidden p-6 sm:p-10"
             >
-              <Quote className="w-8 h-8 text-ghz-blue-electric/30 mb-4" />
-              <p className="font-sans text-sm sm:text-base text-ghz-silver/90 leading-relaxed italic mb-6">
-                "{testimonials[current].quote}"
-              </p>
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div>
-                  <p className="font-display font-semibold text-sm text-ghz-white">
-                    {testimonials[current].author}
-                  </p>
-                  <p className="text-xs font-mono text-ghz-silver/60 mt-0.5">
-                    {testimonials[current].company}
-                  </p>
+              <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-ghz-gold/10 blur-3xl" />
+              <div className="relative z-10">
+                <div className="mb-8 flex items-center justify-between gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-ghz-blue-electric/10 text-ghz-blue-electric ring-1 ring-ghz-blue-electric/20">
+                    <Quote className="h-6 w-6" />
+                  </div>
+                  <div className="flex items-center gap-1" aria-label={`${testimonial.rating} daripada 5 bintang`}>
+                    {Array.from({ length: testimonial.rating }).map((_, index) => (
+                      <Star key={index} className="h-4 w-4 fill-ghz-gold text-ghz-gold" />
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-center gap-0.5">
-                  {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-                  ))}
+
+                <p className="font-display text-xl font-medium leading-8 tracking-[-0.02em] text-ghz-white sm:text-2xl sm:leading-10">
+                  “{testimonial.quote}”
+                </p>
+
+                <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="font-display text-base font-semibold text-ghz-white">{testimonial.author}</p>
+                    <p className="mt-1 text-sm text-ghz-silver-muted">{testimonial.company}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={prev}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-ghz-silver transition hover:border-ghz-blue-electric/40 hover:text-ghz-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric"
+                      aria-label="Testimoni sebelumnya"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={next}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-ghz-silver transition hover:border-ghz-blue-electric/40 hover:text-ghz-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric"
+                      aria-label="Testimoni seterusnya"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           </AnimatePresence>
 
-          {/* Navigation arrows */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-6 w-10 h-10 rounded-full bg-ghz-blue-deep/40 border border-ghz-silver/10 flex items-center justify-center text-ghz-silver hover:text-ghz-white hover:bg-ghz-blue-deep/60 transition-all hover:scale-105"
-            aria-label="Testimoni sebelumnya"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-6 w-10 h-10 rounded-full bg-ghz-blue-deep/40 border border-ghz-silver/10 flex items-center justify-center text-ghz-silver hover:text-ghz-white hover:bg-ghz-blue-deep/60 transition-all hover:scale-105"
-            aria-label="Testimoni seterusnya"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Dots indicator */}
-        <div className="flex items-center justify-center gap-2 mt-6">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => { setDirection(idx > current ? 1 : -1); setCurrent(idx); }}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                idx === current
-                  ? 'bg-ghz-blue-electric w-6'
-                  : 'bg-ghz-silver/20 hover:bg-ghz-silver/40'
-              }`}
-              aria-label={`Testimoni ${idx + 1}`}
-            />
-          ))}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            {testimonials.map((item, index) => (
+              <button
+                key={item.author}
+                type="button"
+                onClick={() => {
+                  setDirection(index > current ? 1 : -1);
+                  setCurrent(index);
+                }}
+                className={`h-2 rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-ghz-blue-electric ${
+                  index === current ? 'w-8 bg-ghz-blue-electric' : 'w-2 bg-white/20 hover:bg-white/40'
+                }`}
+                aria-label={`Lihat testimoni ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
