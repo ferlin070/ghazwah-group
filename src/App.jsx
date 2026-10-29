@@ -12,6 +12,8 @@ const About = lazy(() => import('./sections/About'));
 const Portfolio = lazy(() => import('./sections/Portfolio'));
 const Subsidiaries = lazy(() => import('./sections/Subsidiaries'));
 const CollabAndContact = lazy(() => import('./sections/CollabAndContact'));
+const Penafian = lazy(() => import('./sections/Penafian'));
+const DasarPrivasi = lazy(() => import('./sections/DasarPrivasi'));
 const ChatbotWidget = lazy(() => import('./components/ChatbotWidget'));
 const Footer = lazy(() => import('./components/Footer'));
 
@@ -62,6 +64,14 @@ export default function App() {
 
         <Suspense fallback={<SectionFallback />}>
           <CollabAndContact />
+        </Suspense>
+
+        <Suspense fallback={<SectionFallback />}>
+          <Penafian />
+        </Suspense>
+
+        <Suspense fallback={<SectionFallback />}>
+          <DasarPrivasi />
         </Suspense>
       </main>
 
