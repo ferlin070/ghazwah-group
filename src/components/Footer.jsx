@@ -144,8 +144,8 @@ export default function Footer() {
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-ghz-silver-muted sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {currentYear} Ghazwah Group (Ghazwah Trading). Hak Cipta Terpelihara.</p>
           <div className="flex gap-5">
-            <a href="#" className="professional-link">Penafian</a>
-            <a href="#" className="professional-link">Dasar Privasi</a>
+            <a href="#penafian" className="professional-link">Penafian</a>
+            <a href="#dasar-privasi" className="professional-link">Dasar Privasi</a>
           </div>
         </div>
       </div>
