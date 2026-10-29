@@ -66,7 +66,7 @@ export default function Navbar() {
             </div>
 
             <a href="#collab" className="btn-gold px-5 py-2.5">
-              Collab Dengan Kami
+              Bekerjasama Dengan Kami
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -105,7 +105,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(false)}
             className="btn-gold mt-4 w-full"
           >
-            Collab Dengan Kami
+            Bekerjasama Dengan Kami
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
